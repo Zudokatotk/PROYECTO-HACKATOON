@@ -4,26 +4,31 @@
         <button class="btn-cerrar-modal" onclick="cerrarModalPerfil()">
             <i class="fa-solid fa-xmark"></i>
         </button>
-        <img src="https://cdn-icons-png.flaticon.com/512/4140/4140047.png" class="foto-modal">
+        <img src="https://cdn-icons-png.flaticon.com/512/4140/4140047.png" class="foto-modal" id="modal-foto-perfil">
         <h3 style="color: #4a235a; margin-bottom: 20px; font-size: 1.4rem;">Datos de Cuenta</h3>
         <div class="dato-perfil">
-            <label>Nombre y Apellido</label>
-            <span>Valeria Gómez</span>
+            <label>Nombre de Usuario</label>
+            <span id="modal-nombre">—</span>
         </div>
         <div class="dato-perfil">
             <label>Correo Electrónico</label>
-            <span>valeria.gomez@email.com</span>
+            <span id="modal-correo">—</span>
         </div>
         <div class="dato-perfil">
             <label>Edad</label>
-            <span>24 años</span>
+            <span id="modal-edad">—</span>
         </div>
-        <div class="dato-perfil" style="background: #fff8e1; border-left-color: #f39c12;">
+        <div class="dato-perfil">
+            <label>Carnet de Identidad</label>
+            <span id="modal-carnet">—</span>
+        </div>
+        <div class="dato-perfil" id="modal-estado-caja" style="background: #fff8e1; border-left-color: #f39c12;">
             <label>Estado de Seguridad</label>
-            <span style="color: #d35400; font-weight: bold;">
-                <i class="fa-solid fa-circle-check" style="color: #f39c12;"></i> Identidad Verificada
-            </span>
+            <span id="modal-estado" style="font-weight: bold;">—</span>
         </div>
+        <button class="btn-accion" onclick="cerrarSesion()" style="background: linear-gradient(135deg, #e74c3c, #c0392b); margin-top: 15px;">
+            <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+        </button>
     </div>
 </div>
 
