@@ -13,6 +13,7 @@ let temporizador = null;
 let tiempo = 10;
 let reconocimiento = null;
 let vozActiva = false;
+let sistemaActivo = true; // Estado del sistema (encendido/apagado)
 
 // ENVIAR ALERTA
 const enviarAlerta = () => {
@@ -110,7 +111,7 @@ const cancelarAlerta = () => {
 
 // DETECCIÓN POR TOQUES
 const detectarToques = () => {
-    if(alertaEnProceso) return;
+    if(alertaEnProceso || !sistemaActivo) return; // No detectar si el sistema está apagado
     
     const ahora = Date.now();
     if(ahora - ultimoToque <= tiempoEntreToques) {
@@ -195,6 +196,43 @@ const iniciarReconocimientoVoz = () => {
     }
 };
 
+// TOGGLE DEL SISTEMA (ENCENDER/APAGAR)
+const toggleSistemaAlertas = () => {
+    sistemaActivo = !sistemaActivo;
+    const estado = document.getElementById("estado-alerta");
+    
+    if (sistemaActivo) {
+        // Sistema ENCENDIDO
+        estado.style.background = "#2ecc71";
+        estado.innerText = vozActiva ? "Sistema activo 📱🎤" : "Sistema activo 📱";
+        
+        // Reiniciar reconocimiento de voz si estaba activo
+        if (vozActiva && reconocimiento) {
+            try {
+                reconocimiento.start();
+            } catch(e) {
+                console.log("Reconocimiento ya activo");
+            }
+        }
+        
+        console.log("✅ Sistema de alertas ACTIVADO");
+    } else {
+        // Sistema APAGADO
+        estado.style.background = "#95a5a6";
+        estado.innerText = "Sistema desactivado ⏸️";
+        
+        // Detener reconocimiento de voz
+        if (reconocimiento) {
+            reconocimiento.stop();
+        }
+        
+        // Resetear contador
+        contadorToques = 0;
+        
+        console.log("⏸️ Sistema de alertas DESACTIVADO");
+    }
+};
+
 // INICIALIZAR SISTEMA DE ALERTAS
 const inicializarSistemaAlertas = () => {
     console.log("Inicializando sistema de alertas de emergencia...");
@@ -205,11 +243,18 @@ const inicializarSistemaAlertas = () => {
     // También activar para clicks (funciona en desktop para pruebas)
     document.addEventListener("click", detectarToques);
     
-    // Mostrar indicador de estado
+    // Mostrar indicador de estado y hacerlo clickeable
     const estado = document.getElementById("estado-alerta");
     if (estado) {
         estado.style.display = "block";
         estado.innerText = "Sistema activo 📱";
+        estado.style.cursor = "pointer";
+        
+        // Agregar evento click para toggle
+        estado.addEventListener("click", (e) => {
+            e.stopPropagation(); // Evitar que cuente como toque para alerta
+            toggleSistemaAlertas();
+        });
     }
     
     // Preguntar por reconocimiento de voz después de un pequeño delay

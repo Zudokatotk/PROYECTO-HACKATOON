@@ -26,7 +26,7 @@ body { background-color: #e9ecef; display: flex; justify-content: center; align-
 .resena-caja { background: #f8f9fa; padding: 12px; border-radius: 10px; font-size: 0.85rem; color: #555; margin-bottom: 8px; border-left: 3px solid #2ecc71; text-align: left; }
 
 /* --- VISTAS GLOBALES --- */
-.contenido-vistas { flex-grow: 1; overflow-y: auto; padding: 20px; padding-bottom: 100px; }
+.contenido-vistas { flex-grow: 1; overflow-y: auto; padding: 20px; padding-bottom: 120px; }
 .vista { display: none; animation: fadeIn 0.3s ease-in-out; }
 .vista.activa { display: block; }
 .oculto { display: none !important; }

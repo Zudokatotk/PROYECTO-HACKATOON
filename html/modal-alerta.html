@@ -64,7 +64,7 @@
 <div id="estado-alerta" style="
     display: none;
     position: fixed;
-    bottom: 90px;
+    bottom: 110px;
     right: 20px;
     background: #2ecc71;
     color: white;
@@ -75,7 +75,9 @@
     z-index: 999;
     box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
     transition: all 0.3s;
-">
+    cursor: pointer;
+    user-select: none;
+" onclick="toggleSistemaAlertas()" title="Click para encender/apagar">
     Sistema activo 📱
 </div>
 
