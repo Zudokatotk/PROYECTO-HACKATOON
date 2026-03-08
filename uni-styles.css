@@ -146,7 +146,7 @@ input:checked + .slider { background-color: #e056fd; } input:checked + .slider:b
     background-color: white; 
     display: flex; 
     justify-content: space-around; 
-    padding: 12px 0 45px 0 !important; /* Padding ajustado a 45px */
+    padding: 12px 0 30px 0 !important; /* Padding ajustado a 30px */
     box-shadow: 0 -5px 15px rgba(0,0,0,0.05); 
     border-top-left-radius: 20px; 
     border-top-right-radius: 20px; 
@@ -168,16 +168,16 @@ input:checked + .slider { background-color: #e056fd; } input:checked + .slider:b
 /* Ajuste para celulares (pantallas angostas) */
 @media (max-width: 600px) {
     .barra-inferior {
-        padding: 15px 0 45px 0 !important; /* Ajustado a 45px */
+        padding: 15px 0 30px 0 !important; /* Ajustado a 30px */
         bottom: 0 !important;
     }
     
     .espaciador-sistema {
-        height: 45px; /* Ajustado también */
+        height: 30px; /* Ajustado también */
     }
     
     .contenido-vistas {
-        padding-bottom: 180px !important; /* Espacio en celulares */
+        padding-bottom: 165px !important; /* Espacio en celulares */
     }
 }
 
