@@ -138,8 +138,10 @@ input:checked + .slider { background-color: #e056fd; } input:checked + .slider:b
 
 /* --- BARRA INFERIOR --- */
 .barra-inferior { 
-    position: absolute; 
+    position: fixed; /* Cambio de absolute a fixed */
     bottom: 0; 
+    left: 0;
+    right: 0;
     width: 100%; 
     background-color: white; 
     display: flex; 
@@ -151,23 +153,41 @@ input:checked + .slider { background-color: #e056fd; } input:checked + .slider:b
     z-index: 10; 
 }
 
+/* Espaciador invisible para botones del sistema */
+.espaciador-sistema {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    background: transparent;
+    pointer-events: none;
+    z-index: 9;
+}
+
 /* Ajuste para celulares (pantallas angostas) */
 @media (max-width: 600px) {
     .barra-inferior {
-        bottom: 20px; /* Subir el menú 20px en celulares */
-        padding: 12px 0 max(12px, env(safe-area-inset-bottom));
+        padding: 15px 0 35px 0; /* Más padding abajo para botones del sistema */
+    }
+    
+    .espaciador-sistema {
+        height: 40px; /* Espacio extra para botones del sistema */
     }
     
     .contenido-vistas {
-        padding-bottom: 140px; /* Más espacio en celulares */
+        padding-bottom: 160px; /* Mucho más espacio en celulares */
     }
 }
 
 /* Ajuste para tablets y PC (pantallas anchas) */
 @media (min-width: 601px) {
     .barra-inferior {
-        bottom: 0; /* Menú pegado abajo en PC */
         padding: 12px 0;
+    }
+    
+    .espaciador-sistema {
+        height: 0; /* Sin espacio extra en PC */
     }
     
     .contenido-vistas {
