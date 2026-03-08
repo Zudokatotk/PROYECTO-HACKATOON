@@ -175,7 +175,13 @@
             <span style="color: #9b59b6;">• Auto-actualización cada 10s</span>
         </p>
         
-        <div class="formulario-aln-accion btn-enviar-morado" onclick="publicarChat()">
+        <div class="formulario-alerta">
+            <textarea id="texto-nuevo-chat" class="textarea-app" placeholder="¿Cómo te sientes hoy? ¿Necesitas un consejo?" rows="2"></textarea>
+            <div class="opciones-alerta">
+                <label class="checkbox-anonimo">
+                    <input type="checkbox" id="check-anonimo-chat"> Ocultar identidad
+                </label>
+                <button class="btn-accion btn-enviar-morado" onclick="publicarChat()">
                     <i class="fa-solid fa-paper-plane"></i> Publicar
                 </button>
             </div>

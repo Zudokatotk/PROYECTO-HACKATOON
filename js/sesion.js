@@ -37,10 +37,10 @@ function cargarDatosUsuario(usuario) {
         headerNombre.innerHTML = `Hola, ${usuario.nombre} ${icono}`;
     }
     
-    // Actualizar foto de perfil si existe
+    // Actualizar foto de perfil en el header
     const fotoPerfil = document.getElementById('mi-foto-perfil');
-    if (fotoPerfil && usuario.foto) {
-        fotoPerfil.src = usuario.foto;
+    if (fotoPerfil) {
+        fotoPerfil.src = usuario.foto || 'https://cdn-icons-png.flaticon.com/512/4140/4140047.png';
     }
     
     // Guardar datos globalmente para uso en modales
@@ -74,8 +74,8 @@ function abrirModalPerfil() {
         }
     }
     
-    if (modalFoto && usuario.foto) {
-        modalFoto.src = usuario.foto;
+    if (modalFoto) {
+        modalFoto.src = usuario.foto || 'https://cdn-icons-png.flaticon.com/512/4140/4140047.png';
     }
     
     // Mostrar modal

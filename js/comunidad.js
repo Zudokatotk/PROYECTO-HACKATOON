@@ -313,10 +313,12 @@ async function publicarChat() {
         return; 
     }
 
-    const nombre = esAnonimo ? "Usuaria Anónima" : "Valeria Gómez";
+    // Obtener datos del usuario actual
+    const usuario = window.usuarioActual || JSON.parse(sessionStorage.getItem('usuario') || '{}');
+    const nombre = esAnonimo ? "Usuaria Anónima" : (usuario.nombre || "Usuario");
     const avatar = esAnonimo
         ? "https://cdn-icons-png.flaticon.com/512/847/847969.png"
-        : "https://cdn-icons-png.flaticon.com/512/4140/4140047.png";
+        : (usuario.foto || "https://cdn-icons-png.flaticon.com/512/4140/4140047.png");
 
     // Mostrar indicador de carga
     const btnPublicar = document.querySelector('.btn-enviar-morado');

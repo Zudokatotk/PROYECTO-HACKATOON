@@ -58,8 +58,8 @@
         input.campo-ok    { border-color: #27ae60 !important; background: #f5fff8; }
 
         input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-        input[type="number"] { -moz-appearance: textfield; }
+        input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; appearance: none; margin: 0; }
+        input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
 
         .icono-campo {
             position: absolute; right: 10px; top: 50%;
@@ -93,6 +93,16 @@
         @keyframes aparecer {
             from { opacity: 0; transform: translateY(8px); }
             to   { opacity: 1; transform: translateY(0); }
+        }
+
+        #video-camara, #preview-foto {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-height: 300px;
+            object-fit: cover;
+        }
+
+        #seccion-camara button {
+            width: 100%;
         }
 
         .btn-omitir-login {
@@ -147,6 +157,28 @@
         <p class="msg-error" id="error-carnet">
             <i class="fa-solid fa-circle-exclamation"></i> Este carnet ya está registrado. Por favor usa otro.
         </p>
+
+        <!-- Escáner de Rostro -->
+        <div id="seccion-camara" style="margin: 20px 0; display: none;">
+            <div style="background: #f4ecf7; padding: 15px; border-radius: 12px; border-left: 4px solid #9b59b6;">
+                <p style="color: #4a235a; font-size: 0.9rem; margin: 0 0 10px 0;">
+                    <i class="fa-solid fa-camera"></i> Verificación de identidad
+                </p>
+                <video id="video-camara" autoplay playsinline style="width: 100%; border-radius: 10px; display: none;"></video>
+                <canvas id="canvas-foto" style="width: 100%; border-radius: 10px; display: none;"></canvas>
+                <img id="preview-foto" style="width: 100%; border-radius: 10px; display: none; margin-top: 10px;">
+                
+                <button type="button" id="btn-abrir-camara" onclick="abrirCamara()" style="background: linear-gradient(135deg, #3498db, #2980b9); margin-top: 10px;">
+                    <i class="fa-solid fa-camera"></i> Activar cámara
+                </button>
+                <button type="button" id="btn-capturar" onclick="capturarFoto()" style="background: linear-gradient(135deg, #2ecc71, #27ae60); margin-top: 10px; display: none;">
+                    <i class="fa-solid fa-camera-retro"></i> Capturar foto
+                </button>
+                <button type="button" id="btn-reintentar" onclick="reintentarFoto()" style="background: linear-gradient(135deg, #f39c12, #e67e22); margin-top: 10px; display: none;">
+                    <i class="fa-solid fa-rotate-right"></i> Tomar otra foto
+                </button>
+            </div>
+        </div>
 
         <button type="button" id="btn-registrar" onclick="registrarUsuario()">
             <i class="fa-solid fa-user-plus"></i> Crear cuenta
@@ -264,7 +296,7 @@
             correo: correo,
             password: password,
             carnet: carnet,
-            foto_rostro: ""
+            foto_rostro: fotoCapturada || ""
         });
 
         // Guardar en sessionStorage (funciona con o sin API)
@@ -273,12 +305,12 @@
             edad: edad,
             correo: correo,
             carnet: carnet,
-            foto: "",
-            verificado: false
+            foto: fotoCapturada || "https://cdn-icons-png.flaticon.com/512/4140/4140047.png",
+            verificado: fotoCapturada ? true : false
         }));
 
         document.getElementById('msg-verificado').style.display = 'block';
-        setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+        setTimeout(() => { window.location.href = 'app.html'; }, 1500);
     }
 
     function omitirRegistro() {
@@ -291,7 +323,7 @@
             foto: "",
             verificado: false
         }));
-        window.location.href = 'index.html';
+        window.location.href = 'app.html';
     }
 
     // Verificar si ya hay sesión
@@ -301,6 +333,108 @@
             window.location.href = 'app.html';
         }
     });
+
+    // ==========================================
+    // ESCÁNER DE ROSTRO CON CÁMARA
+    // ==========================================
+    let streamCamara = null;
+    let fotoCapturada = null;
+
+    // Mostrar sección de cámara cuando se completen los campos básicos
+    inputCarnet.addEventListener('input', () => {
+        const nombre = inputNombre.value.trim();
+        const edad = parseInt(inputEdad.value);
+        const correo = inputCorreo.value.trim();
+        const carnet = inputCarnet.value.trim();
+        
+        if (nombre && edad && correo && carnet && carnet.length >= 5) {
+            document.getElementById('seccion-camara').style.display = 'block';
+        }
+    });
+
+    async function abrirCamara() {
+        const video = document.getElementById('video-camara');
+        const btnAbrir = document.getElementById('btn-abrir-camara');
+        const btnCapturar = document.getElementById('btn-capturar');
+
+        try {
+            // Solicitar acceso a la cámara frontal
+            streamCamara = await navigator.mediaDevices.getUserMedia({
+                video: { 
+                    facingMode: 'user', // Cámara frontal
+                    width: { ideal: 640 },
+                    height: { ideal: 480 }
+                }
+            });
+
+            video.srcObject = streamCamara;
+            video.style.display = 'block';
+            btnAbrir.style.display = 'none';
+            btnCapturar.style.display = 'block';
+
+        } catch (error) {
+            console.error('Error al acceder a la cámara:', error);
+            alert('⚠️ No se pudo acceder a la cámara.\n\nAsegúrate de:\n• Dar permisos de cámara al navegador\n• Usar HTTPS o localhost\n• Tener una cámara conectada');
+        }
+    }
+
+    function capturarFoto() {
+        const video = document.getElementById('video-camara');
+        const canvas = document.getElementById('canvas-foto');
+        const preview = document.getElementById('preview-foto');
+        const btnCapturar = document.getElementById('btn-capturar');
+        const btnReintentar = document.getElementById('btn-reintentar');
+
+        // Configurar canvas con las dimensiones del video
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        // Dibujar el frame actual del video en el canvas
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // Convertir a imagen base64
+        fotoCapturada = canvas.toDataURL('image/jpeg', 0.8);
+
+        // Mostrar preview
+        preview.src = fotoCapturada;
+        preview.style.display = 'block';
+
+        // Ocultar video y cambiar botones
+        video.style.display = 'none';
+        btnCapturar.style.display = 'none';
+        btnReintentar.style.display = 'block';
+
+        // Detener la cámara
+        if (streamCamara) {
+            streamCamara.getTracks().forEach(track => track.stop());
+            streamCamara = null;
+        }
+
+        // Feedback visual
+        const msg = document.createElement('div');
+        msg.style.cssText = `
+            background: #d4edda; color: #155724; padding: 10px;
+            border-radius: 8px; margin-top: 10px; text-align: center;
+            border-left: 4px solid #28a745; animation: aparecer 0.3s ease;
+        `;
+        msg.innerHTML = '<i class="fa-solid fa-check-circle"></i> Foto capturada correctamente';
+        document.getElementById('seccion-camara').appendChild(msg);
+        setTimeout(() => msg.remove(), 3000);
+    }
+
+    function reintentarFoto() {
+        const video = document.getElementById('video-camara');
+        const preview = document.getElementById('preview-foto');
+        const btnAbrir = document.getElementById('btn-abrir-camara');
+        const btnReintentar = document.getElementById('btn-reintentar');
+
+        // Limpiar foto capturada
+        fotoCapturada = null;
+        preview.style.display = 'none';
+        btnReintentar.style.display = 'none';
+        btnAbrir.style.display = 'block';
+    }
 </script>
 
 </body>
