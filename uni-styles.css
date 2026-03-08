@@ -168,15 +168,16 @@ input:checked + .slider { background-color: #e056fd; } input:checked + .slider:b
 /* Ajuste para celulares (pantallas angostas) */
 @media (max-width: 600px) {
     .barra-inferior {
-        padding: 15px 0 35px 0; /* Más padding abajo para botones del sistema */
+        padding: 15px 0 50px 0; /* MUCHO más padding abajo (50px) */
+        bottom: 10px; /* Subir el menú 10px adicionales */
     }
     
     .espaciador-sistema {
-        height: 40px; /* Espacio extra para botones del sistema */
+        height: 60px; /* Más espacio extra para botones del sistema */
     }
     
     .contenido-vistas {
-        padding-bottom: 160px; /* Mucho más espacio en celulares */
+        padding-bottom: 180px; /* Mucho más espacio en celulares */
     }
 }
 
