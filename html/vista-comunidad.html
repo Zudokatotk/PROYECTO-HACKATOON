@@ -162,11 +162,17 @@
         <button class="btn-volver" onclick="cerrarSubvistaForo()">
             <i class="fa-solid fa-arrow-left"></i> Volver al Menú
         </button>
-        <h4 style="color: #351a42; margin-bottom: 10px; font-size: 1.1rem;">
-            <i class="fa-solid fa-comments" style="color: #9b59b6;"></i> Foro de Mujeres
-        </h4>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h4 style="color: #351a42; margin: 0; font-size: 1.1rem;">
+                <i class="fa-solid fa-comments" style="color: #9b59b6;"></i> Foro de Mujeres
+            </h4>
+            <span id="indicador-actualizacion" style="font-size: 0.75rem; color: #2ecc71; display: none;">
+                <i class="fa-solid fa-sync fa-spin"></i> Actualizando...
+            </span>
+        </div>
         <p style="font-size: 0.85rem; color: #888; margin-bottom: 15px;">
             <i class="fa-solid fa-shield-halved" style="color:#2ecc71;"></i> Protegido por IA contra lenguaje ofensivo.
+            <span style="color: #9b59b6;">• Auto-actualización cada 10s</span>
         </p>
         
         <div class="formulario-alerta">

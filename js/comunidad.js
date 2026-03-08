@@ -5,6 +5,9 @@
 // URL de API Gateway configurada
 const API_URL = 'https://jrumqjnz9b.execute-api.us-east-1.amazonaws.com/prod/mensajes';
 
+// Variable para controlar la actualización automática
+let intervaloActualizacion = null;
+
 // Array para almacenar amigas (solo demostración)
 let amigasConfianza = [
     { nombre: "María López", telefono: "70123456" },
@@ -27,20 +30,51 @@ function abrirSubvistaForo() {
     document.getElementById('menu-comunidad').classList.add('oculto'); 
     document.getElementById('subvista-foro').classList.remove('oculto'); 
     cargarMensajesDesdeAWS(); // Cargar mensajes al abrir el foro
+    iniciarActualizacionAutomatica(); // Iniciar actualización automática
 }
 
 function cerrarSubvistaForo() { 
     document.getElementById('subvista-foro').classList.add('oculto'); 
     document.getElementById('menu-comunidad').classList.remove('oculto'); 
+    detenerActualizacionAutomatica(); // Detener actualización al cerrar
+}
+
+// Iniciar actualización automática cada 10 segundos
+function iniciarActualizacionAutomatica() {
+    // Limpiar intervalo anterior si existe
+    if (intervaloActualizacion) {
+        clearInterval(intervaloActualizacion);
+    }
+    
+    // Actualizar cada 10 segundos
+    intervaloActualizacion = setInterval(() => {
+        cargarMensajesDesdeAWS(true); // true = actualización silenciosa
+    }, 10000); // 10000 ms = 10 segundos
+}
+
+// Detener actualización automática
+function detenerActualizacionAutomatica() {
+    if (intervaloActualizacion) {
+        clearInterval(intervaloActualizacion);
+        intervaloActualizacion = null;
+    }
 }
 
 // Cargar mensajes desde AWS DynamoDB
-async function cargarMensajesDesdeAWS() {
+async function cargarMensajesDesdeAWS(silencioso = false) {
+    // Mostrar indicador de actualización
+    const indicador = document.getElementById('indicador-actualizacion');
+    if (indicador && silencioso) {
+        indicador.style.display = 'inline';
+    }
+    
     try {
         const response = await fetch(API_URL);
         const data = await response.json();
         
         if (data.success && data.mensajes) {
+            const mensajesAnteriores = datosChat.length;
+            
             // Convertir formato AWS a formato local
             datosChat = data.mensajes.map(msg => ({
                 nombre: msg.usuario,
@@ -51,12 +85,55 @@ async function cargarMensajesDesdeAWS() {
             }));
             
             renderizarChat();
+            
+            // Mostrar notificación si hay mensajes nuevos (solo en actualización automática)
+            if (silencioso && datosChat.length > mensajesAnteriores) {
+                mostrarNotificacionNuevosMensajes(datosChat.length - mensajesAnteriores);
+            }
         }
     } catch (error) {
         console.error('Error al cargar mensajes:', error);
         // Si falla, usar datos locales
-        renderizarChat();
+        if (!silencioso) {
+            renderizarChat();
+        }
+    } finally {
+        // Ocultar indicador después de 1 segundo
+        if (indicador && silencioso) {
+            setTimeout(() => {
+                indicador.style.display = 'none';
+            }, 1000);
+        }
     }
+}
+
+// Mostrar notificación de nuevos mensajes
+function mostrarNotificacionNuevosMensajes(cantidad) {
+    const notificacion = document.createElement('div');
+    notificacion.style.cssText = `
+        position: fixed;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #2ecc71, #27ae60);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 25px;
+        box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+        z-index: 1000;
+        font-size: 0.9rem;
+        font-weight: bold;
+        animation: slideDown 0.3s ease-out;
+    `;
+    notificacion.innerHTML = `<i class="fa-solid fa-bell"></i> ${cantidad} mensaje${cantidad > 1 ? 's nuevos' : ' nuevo'}`;
+    
+    document.body.appendChild(notificacion);
+    
+    // Remover después de 3 segundos
+    setTimeout(() => {
+        notificacion.style.animation = 'slideUp 0.3s ease-out';
+        setTimeout(() => notificacion.remove(), 300);
+    }, 3000);
 }
 
 // Calcular tiempo transcurrido desde un timestamp
