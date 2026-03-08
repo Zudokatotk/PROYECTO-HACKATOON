@@ -2,75 +2,306 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <title>App Segura - Interfaz Principal</title>
-    
-    <!-- Librerías externas -->
+    <title>Registro Seguro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
-    <!-- Estilos propios -->
-    <link rel="stylesheet" href="uni-styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fbf8fc, #e8daef);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .contenedor {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(142, 68, 173, 0.15);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .logo-registro { font-size: 3rem; color: #9b59b6; margin-bottom: 10px; }
+        h2 { color: #4a235a; margin-bottom: 5px; }
+        p.subtitulo { color: #888; font-size: 0.9rem; margin-bottom: 25px; }
+
+        .fila-doble { display: flex; gap: 10px; margin: 10px 0; }
+        .fila-doble .campo-wrapper { flex: 1; margin: 0; }
+        .fila-doble .campo-wrapper.estrecho { flex: 0 0 90px; }
+
+        .campo-wrapper { position: relative; margin: 10px 0; }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #f0e6f6;
+            border-radius: 12px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s;
+            font-size: 15px;
+        }
+        input:focus { border-color: #9b59b6; }
+        input.campo-error { border-color: #e74c3c !important; background: #fff5f5; }
+        input.campo-ok    { border-color: #27ae60 !important; background: #f5fff8; }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type="number"] { -moz-appearance: textfield; }
+
+        .icono-campo {
+            position: absolute; right: 10px; top: 50%;
+            transform: translateY(-50%); font-size: 0.9rem; display: none;
+        }
+        .icono-campo.error { color: #e74c3c; display: block; }
+        .icono-campo.ok    { color: #27ae60; display: block; }
+        .icono-campo.carga { color: #9b59b6; display: block; }
+
+        .msg-error {
+            color: #e74c3c; font-size: 0.82rem; text-align: left;
+            margin: -4px 0 4px 4px; display: none; animation: aparecer 0.3s ease;
+        }
+
+        button {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white; padding: 14px 20px; border: none; border-radius: 25px;
+            cursor: pointer; margin-top: 15px; width: 100%; font-size: 16px;
+            font-weight: bold; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(142,68,173,0.4); }
+        button:disabled { background: #d2b4de; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .mensaje-final {
+            font-weight: bold; display: none; margin-top: 15px;
+            padding: 15px; border-radius: 12px; text-align: left;
+            animation: aparecer 0.4s ease;
+        }
+        .mensaje-final.verificado   { color: #8e44ad; background: #f4ecf7; border-left: 5px solid #8e44ad; }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-omitir-login {
+            background: white !important;
+            color: #9b59b6 !important;
+            border: 2px solid #d2b4de !important;
+            margin-top: 10px;
+        }
+        .btn-omitir-login:hover {
+            background: #f9f2fd !important;
+            border-color: #9b59b6 !important;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="app-container">
-        
-        <!-- Header -->
-        <header class="header-perfil">
-            <div class="perfil-info-agrupado" onclick="abrirModalPerfil()" title="Ver mi perfil">
-                <img src="https://cdn-icons-png.flaticon.com/512/4140/4140047.png" alt="Perfil" id="mi-foto-perfil" class="foto-perfil">
-                <div class="info-perfil">
-                    <h2>Hola, Valeria <i class="fa-solid fa-circle-check" style="color: #f39c12; font-size: 1rem;"></i></h2>
-                    <div class="etiqueta-segura"><i class="fa-solid fa-shield-halved"></i> Modo Seguro</div>
-                </div>
-            </div>
-            <i class="fa-solid fa-gear btn-engranaje" onclick="cambiarVista('configuracion', null)"></i>
-        </header>
+<div class="contenedor">
+    <i class="fa-solid fa-shield-heart logo-registro"></i>
+    <h2>Crea tu perfil seguro</h2>
+    <p class="subtitulo">Únete a nuestra comunidad verificada</p>
 
-        <!-- Contenedor de Modales (se carga dinámicamente) -->
-        <div id="contenedor-modales"></div>
+    <form id="formulario-registro" onsubmit="return false;">
+        <!-- Nombre de usuario + Edad -->
+        <div class="fila-doble">
+            <div class="campo-wrapper">
+                <input type="text" id="nombre" placeholder="Nombre de usuario" required autocomplete="off">
+            </div>
+            <div class="campo-wrapper estrecho">
+                <input type="number" id="edad" placeholder="Edad" min="13" max="120" required>
+            </div>
+        </div>
 
-        <!-- Contenedor de Vistas (se cargan dinámicamente) -->
-        <main class="contenido-vistas" id="contenido-vistas"></main>
+        <!-- Correo -->
+        <div class="campo-wrapper">
+            <input type="email" id="correo" placeholder="Correo electrónico" required autocomplete="off">
+            <span class="icono-campo" id="icono-correo"></span>
+        </div>
+        <p class="msg-error" id="error-correo">
+            <i class="fa-solid fa-circle-exclamation"></i> Este correo ya tiene una cuenta registrada.
+        </p>
 
-        <!-- Barra de Navegación Inferior -->
-        <nav class="barra-inferior">
-            <div class="nav-item activo" id="nav-mapa" onclick="cambiarVista('mapa', this)">
-                <i class="fa-solid fa-map-location-dot"></i>
-                <span>Mapa</span>
-            </div>
-            <div class="nav-item" id="nav-transporte" onclick="cambiarVista('transporte', this)">
-                <i class="fa-solid fa-car-side"></i>
-                <span>Transporte</span>
-            </div>
-            <div class="nav-item" id="nav-servicios" onclick="cambiarVista('servicios', this)">
-                <i class="fa-solid fa-briefcase"></i>
-                <span>Servicios</span>
-            </div>
-            <div class="nav-item" id="nav-comunidad" onclick="cambiarVista('comunidad', this)">
-                <i class="fa-solid fa-users"></i>
-                <span>Comunidad</span>
-            </div>
-        </nav>
-        
-        <!-- Espaciador para botones del sistema en celulares -->
-        <div class="espaciador-sistema"></div>
+        <!-- Contraseña -->
+        <div class="campo-wrapper">
+            <input type="password" id="password" placeholder="Contraseña segura" required>
+        </div>
+
+        <!-- Carnet -->
+        <div class="campo-wrapper">
+            <input type="text" id="carnet" placeholder="Número de Carnet de Identidad" required autocomplete="off">
+            <span class="icono-campo" id="icono-carnet"></span>
+        </div>
+        <p class="msg-error" id="error-carnet">
+            <i class="fa-solid fa-circle-exclamation"></i> Este carnet ya está registrado. Por favor usa otro.
+        </p>
+
+        <button type="button" id="btn-registrar" onclick="registrarUsuario()">
+            <i class="fa-solid fa-user-plus"></i> Crear cuenta
+        </button>
+
+        <button type="button" class="btn-omitir-login" onclick="omitirRegistro()">
+            <i class="fa-solid fa-arrow-right"></i> Continuar sin registrarme
+        </button>
+    </form>
+
+    <div id="msg-verificado" class="mensaje-final verificado">
+        <i class="fa-solid fa-circle-check"></i> ¡Cuenta creada exitosamente! Redirigiendo...
     </div>
+</div>
 
-    <!-- Scripts organizados por módulos -->
-    <script src="js/datos.js"></script>
-    <script src="js/ui-modales.js"></script>
-    <script src="js/mapa.js"></script>
-    <script src="js/transporte.js"></script>
-    <script src="js/servicios.js"></script>
-    <script src="js/comunidad.js"></script>
-    <script src="js/configuracion.js"></script>
-    <script src="js/navegacion.js"></script>
-    <script src="js/sistema-alertas.js"></script>
-    <script src="js/cargar-vistas.js"></script>
+<script>
+    // URL de tu API PHP (ajusta según tu configuración)
+    const API = "http://localhost/seguridad_app/api.php";
+
+    const inputCorreo = document.getElementById('correo');
+    const inputCarnet = document.getElementById('carnet');
+    const inputNombre = document.getElementById('nombre');
+    const inputEdad = document.getElementById('edad');
+    const errorCorreo = document.getElementById('error-correo');
+    const errorCarnet = document.getElementById('error-carnet');
+    const iconoCorreo = document.getElementById('icono-correo');
+    const iconoCarnet = document.getElementById('icono-carnet');
+
+    function setCampo(input, icono, errorEl, estado) {
+        input.classList.remove('campo-error', 'campo-ok');
+        icono.className = 'icono-campo';
+        icono.innerHTML = '';
+        if (errorEl) errorEl.style.display = 'none';
+        if (estado === 'carga') {
+            icono.classList.add('carga');
+            icono.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+        } else if (estado === 'ok') {
+            input.classList.add('campo-ok');
+            icono.classList.add('ok');
+            icono.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+        } else if (estado === 'error') {
+            input.classList.add('campo-error');
+            icono.classList.add('error');
+            icono.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+            if (errorEl) errorEl.style.display = 'block';
+        }
+    }
+
+    async function apiPost(accion, datos) {
+        try {
+            const r = await fetch(`${API}?accion=${accion}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(datos)
+            });
+            return await r.json();
+        } catch (e) {
+            console.log('API no disponible, usando modo local');
+            return { ok: false, existe: false, mensaje: 'Modo local' };
+        }
+    }
+
+    // Validación en tiempo real: correo
+    let timerCorreo = null;
+    inputCorreo.addEventListener('input', () => {
+        clearTimeout(timerCorreo);
+        setCampo(inputCorreo, iconoCorreo, errorCorreo, 'neutro');
+        const val = inputCorreo.value.trim();
+        if (!val.includes('@') || val.length < 5) return;
+        setCampo(inputCorreo, iconoCorreo, errorCorreo, 'carga');
+        timerCorreo = setTimeout(async () => {
+            const res = await apiPost('verificar_correo', { correo: val });
+            setCampo(inputCorreo, iconoCorreo, errorCorreo, res.existe ? 'error' : 'ok');
+        }, 600);
+    });
+
+    // Validación en tiempo real: carnet
+    let timerCarnet = null;
+    inputCarnet.addEventListener('input', () => {
+        clearTimeout(timerCarnet);
+        setCampo(inputCarnet, iconoCarnet, errorCarnet, 'neutro');
+        const val = inputCarnet.value.trim();
+        if (val.length < 3) return;
+        setCampo(inputCarnet, iconoCarnet, errorCarnet, 'carga');
+        timerCarnet = setTimeout(async () => {
+            const res = await apiPost('verificar_carnet', { carnet: val });
+            setCampo(inputCarnet, iconoCarnet, errorCarnet, res.existe ? 'error' : 'ok');
+        }, 600);
+    });
+
+    async function registrarUsuario() {
+        const nombre = inputNombre.value.trim();
+        const edad = parseInt(inputEdad.value);
+        const correo = inputCorreo.value.trim();
+        const password = document.getElementById('password').value.trim();
+        const carnet = inputCarnet.value.trim();
+
+        if (!nombre || !edad || !correo || !password || !carnet) {
+            alert('Por favor, completa todos los campos para continuar.');
+            return;
+        }
+        if (edad < 13 || edad > 120) {
+            alert('La edad debe estar entre 13 y 120 años.');
+            return;
+        }
+
+        const btnRegistrar = document.getElementById('btn-registrar');
+        btnRegistrar.disabled = true;
+        btnRegistrar.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Registrando...';
+
+        // Intentar registrar en la API
+        const res = await apiPost('registrar', {
+            nombre_usuario: nombre,
+            edad: edad,
+            correo: correo,
+            password: password,
+            carnet: carnet,
+            foto_rostro: ""
+        });
+
+        // Guardar en sessionStorage (funciona con o sin API)
+        sessionStorage.setItem('usuario', JSON.stringify({
+            nombre: nombre,
+            edad: edad,
+            correo: correo,
+            carnet: carnet,
+            foto: "",
+            verificado: false
+        }));
+
+        document.getElementById('msg-verificado').style.display = 'block';
+        setTimeout(() => { window.location.href = 'app.html'; }, 1500);
+    }
+
+    function omitirRegistro() {
+        // Crear usuario temporal
+        sessionStorage.setItem('usuario', JSON.stringify({
+            nombre: "Usuario Invitado",
+            edad: 0,
+            correo: "",
+            carnet: "",
+            foto: "",
+            verificado: false
+        }));
+        window.location.href = 'app.html';
+    }
+
+    // Verificar si ya hay sesión
+    window.addEventListener('load', () => {
+        const usuario = sessionStorage.getItem('usuario');
+        if (usuario) {
+            window.location.href = 'app.html';
+        }
+    });
+</script>
+
 </body>
 </html>

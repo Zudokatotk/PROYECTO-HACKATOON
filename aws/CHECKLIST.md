@@ -28,105 +28,105 @@ Sigue estos pasos en orden. Marca cada uno cuando lo completes.
 - [✅] Click en "Crear función"
 
 ### Agregar código:
-- [ ] Abrir el archivo `programa/aws/lambda-function.js`
-- [ ] Copiar TODO el código
-- [ ] Pegar en el editor de Lambda (reemplazar todo)
-- [ ] Click en "Deploy" (botón naranja)
-- [ ] Esperar mensaje "Successfully deployed"
+- [✅] Abrir el archivo `programa/aws/lambda-function.js`
+- [✅] Copiar TODO el código
+- [✅] Pegar en el editor de Lambda (reemplazar todo)
+- [✅] Click en "Deploy" (botón naranja)
+- [✅] Esperar mensaje "Successfully deployed"
 
 ### Dar permisos:
-- [ ] Click en pestaña "Configuración"
-- [ ] Click en "Permisos" (menú izquierdo)
-- [ ] Click en el nombre del rol (link azul)
-- [ ] Se abre IAM en nueva pestaña
-- [ ] Click en "Agregar permisos" → "Asociar políticas"
-- [ ] Buscar: `AmazonDynamoDBFullAccess`
-- [ ] Marcar checkbox
-- [ ] Click en "Agregar permisos"
-- [ ] Cerrar pestaña de IAM
+- [✅] Click en pestaña "Configuración"
+- [✅] Click en "Permisos" (menú izquierdo)
+- [✅] Click en el nombre del rol (link azul)
+- [✅] Se abre IAM en nueva pestaña
+- [✅] Click en "Agregar permisos" → "Asociar políticas"
+- [✅] Buscar: `AmazonDynamoDBFullAccess`
+- [✅] Marcar checkbox
+- [✅] Click en "Agregar permisos"
+- [✅] Cerrar pestaña de IAM
 
 ## Paso 3: API Gateway (7 min)
 
 ### Crear API:
-- [ ] Abrir consola de API Gateway
-- [ ] Click en "Crear API"
-- [ ] Seleccionar "API REST" (no HTTP API)
-- [ ] Click en "Crear"
-- [ ] Nombre: `ForoMujeresAPI`
-- [ ] Tipo: Regional
-- [ ] Click en "Crear API"
+- [✅] Abrir consola de API Gateway
+- [✅] Click en "Crear API"
+- [✅] Seleccionar "API REST" (no HTTP API)
+- [✅] Click en "Crear"
+- [✅] Nombre: `ForoMujeresAPI`
+- [✅] Tipo: Regional
+- [✅] Click en "Crear API"
 
 ### Crear recurso:
-- [ ] Click en "Acciones" → "Crear recurso"
-- [ ] Nombre: `mensajes`
-- [ ] Ruta: `/mensajes`
-- [ ] ✅ Marcar "Habilitar CORS de API Gateway"
-- [ ] Click en "Crear recurso"
+- [✅] Click en "Acciones" → "Crear recurso"
+- [✅] Nombre: `mensajes`
+- [✅] Ruta: `/mensajes`
+- [✅] ✅ Marcar "Habilitar CORS de API Gateway"
+- [✅] Click en "Crear recurso"
 
 ### Agregar método POST:
-- [ ] Con `/mensajes` seleccionado
-- [ ] Click en "Acciones" → "Crear método"
-- [ ] Seleccionar "POST" del dropdown
-- [ ] Click en el check ✓
-- [ ] Tipo de integración: Función de Lambda
-- [ ] ✅ Marcar "Usar integración de proxy de Lambda"
-- [ ] Función: `ForoMujeresAPI`
-- [ ] Click en "Guardar"
-- [ ] Click en "Aceptar" (permisos)
+- [✅] Con `/mensajes` seleccionado
+- [✅] Click en "Acciones" → "Crear método"
+- [✅] Seleccionar "POST" del dropdown
+- [✅] Click en el check ✓
+- [✅] Tipo de integración: Función de Lambda
+- [✅] ✅ Marcar "Usar integración de proxy de Lambda"
+- [✅] Función: `ForoMujeresAPI`
+- [✅] Click en "Guardar"
+- [✅] Click en "Aceptar" (permisos)
 
 ### Agregar método GET:
-- [ ] Con `/mensajes` seleccionado
-- [ ] Click en "Acciones" → "Crear método"
-- [ ] Seleccionar "GET" del dropdown
-- [ ] Click en el check ✓
-- [ ] Tipo de integración: Función de Lambda
-- [ ] ✅ Marcar "Usar integración de proxy de Lambda"
-- [ ] Función: `ForoMujeresAPI`
-- [ ] Click en "Guardar"
-- [ ] Click en "Aceptar"
+- [✅] Con `/mensajes` seleccionado
+- [✅] Click en "Acciones" → "Crear método"
+- [✅] Seleccionar "GET" del dropdown
+- [✅] Click en el check ✓
+- [✅] Tipo de integración: Función de Lambda
+- [✅] ✅ Marcar "Usar integración de proxy de Lambda"
+- [✅] Función: `ForoMujeresAPI`
+- [✅] Click en "Guardar"
+- [✅] Click en "Aceptar"
 
 ### Habilitar CORS:
-- [ ] Con `/mensajes` seleccionado
-- [ ] Click en "Acciones" → "Habilitar CORS"
-- [ ] Dejar valores por defecto
-- [ ] Click en "Habilitar CORS y reemplazar..."
-- [ ] Click en "Sí, reemplazar..."
-- [ ] Esperar a que termine (todos con ✓)
+- [✅] Con `/mensajes` seleccionado
+- [✅] Click en "Acciones" → "Habilitar CORS"
+- [✅] Dejar valores por defecto
+- [✅] Click en "Habilitar CORS y reemplazar..."
+- [✅] Click en "Sí, reemplazar..."
+- [✅] Esperar a que termine (todos con ✓)
 
 ### Desplegar API:
-- [ ] Click en "Acciones" → "Implementar la API"
-- [ ] Etapa: [Nueva etapa]
-- [ ] Nombre: `prod`
-- [ ] Click en "Implementar"
-- [ ] **COPIAR la "URL de invocación"** (algo como: https://abc123.execute-api.us-east-1.amazonaws.com/prod)
-- [ ] Guardar esta URL en un lugar seguro
+- [✅] Click en "Acciones" → "Implementar la API"
+- [✅] Etapa: [Nueva etapa]
+- [✅] Nombre: `prod`
+- [✅] Click en "Implementar"
+- [✅] **COPIAR la "URL de invocación"** (https://jrumqjnz9b.execute-api.us-east-1.amazonaws.com/prod/mensajes)
+- [✅] Guardar esta URL en un lugar seguro
 
 ## Paso 4: Probar API (3 min)
 
-- [ ] Abrir `programa/aws/test-api.html` en el navegador
-- [ ] Pegar tu URL + `/mensajes` en el campo
+- [✅] Abrir `programa/aws/test-api.html` en el navegador
+- [✅] Pegar tu URL + `/mensajes` en el campo
   - Ejemplo: `https://abc123.execute-api.us-east-1.amazonaws.com/prod/mensajes`
-- [ ] Click en "Test Completo"
-- [ ] Verificar que aparezca ✅ "Test completo exitoso!"
+- [✅] Click en "Test Completo"
+- [✅] Verificar que aparezca ✅ "Test completo exitoso!"
 
 ### Si hay errores:
-- [ ] Revisar `GUIA-CONFIGURACION-AWS.md` sección "Solución de Problemas"
-- [ ] Verificar que CORS esté habilitado
-- [ ] Verificar que Lambda tenga permisos DynamoDB
-- [ ] Redesplegar la API
+- [✅] Revisar `GUIA-CONFIGURACION-AWS.md` sección "Solución de Problemas"
+- [✅] Verificar que CORS esté habilitado
+- [✅] Verificar que Lambda tenga permisos DynamoDB
+- [✅] Redesplegar la API
 
 ## Paso 5: Integrar con tu App (2 min)
 
-- [ ] Abrir `programa/js/comunidad.js`
-- [ ] Buscar línea 5: `const API_URL = ...`
-- [ ] Reemplazar con tu URL completa (incluyendo `/mensajes`)
-- [ ] Guardar el archivo
-- [ ] Abrir `programa/index.html` en el navegador
-- [ ] Ir a la sección "Red de Apoyo Local"
-- [ ] Click en "Foro de Mujeres"
-- [ ] Escribir un mensaje de prueba
-- [ ] Click en "Publicar"
-- [ ] Verificar que aparezca el mensaje
+- [✅] Abrir `programa/js/comunidad.js`
+- [✅] Buscar línea 5: `const API_URL = ...`
+- [✅] Reemplazar con tu URL completa (incluyendo `/mensajes`)
+- [✅] Guardar el archivo
+- [✅] Abrir `programa/index.html` en el navegador
+- [✅] Ir a la sección "Red de Apoyo Local"
+- [✅] Click en "Foro de Mujeres"
+- [✅] Escribir un mensaje de prueba
+- [✅] Click en "Publicar"
+- [✅] Verificar que aparezca el mensaje
 
 ## Paso 6: Prueba Multi-Dispositivo (5 min)
 

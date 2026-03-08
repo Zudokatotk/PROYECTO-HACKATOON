@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>App Segura - Interfaz Principal</title>
+    
+    <!-- Librerías externas -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="uni-styles.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- Header -->
+        <header class="header-perfil">
+            <div class="perfil-info-agrupado" onclick="abrirModalPerfil()" title="Ver mi perfil">
+                <img src="https://cdn-icons-png.flaticon.com/512/4140/4140047.png" alt="Perfil" id="mi-foto-perfil" class="foto-perfil">
+                <div class="info-perfil">
+                    <h2>Hola, Valeria <i class="fa-solid fa-circle-check" style="color: #f39c12; font-size: 1rem;"></i></h2>
+                    <div class="etiqueta-segura"><i class="fa-solid fa-shield-halved"></i> Modo Seguro</div>
+                </div>
+            </div>
+            <i class="fa-solid fa-gear btn-engranaje" onclick="cambiarVista('configuracion', null)"></i>
+        </header>
+
+        <!-- Contenedor de Modales (se carga dinámicamente) -->
+        <div id="contenedor-modales"></div>
+
+        <!-- Contenedor de Vistas (se cargan dinámicamente) -->
+        <main class="contenido-vistas" id="contenido-vistas"></main>
+
+        <!-- Barra de Navegación Inferior -->
+        <nav class="barra-inferior">
+            <div class="nav-item activo" id="nav-mapa" onclick="cambiarVista('mapa', this)">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <span>Mapa</span>
+            </div>
+            <div class="nav-item" id="nav-transporte" onclick="cambiarVista('transporte', this)">
+                <i class="fa-solid fa-car-side"></i>
+                <span>Transporte</span>
+            </div>
+            <div class="nav-item" id="nav-servicios" onclick="cambiarVista('servicios', this)">
+                <i class="fa-solid fa-briefcase"></i>
+                <span>Servicios</span>
+            </div>
+            <div class="nav-item" id="nav-comunidad" onclick="cambiarVista('comunidad', this)">
+                <i class="fa-solid fa-users"></i>
+                <span>Comunidad</span>
+            </div>
+        </nav>
+        
+        <!-- Espaciador para botones del sistema en celulares -->
+        <div class="espaciador-sistema"></div>
+    </div>
+
+    <!-- Scripts organizados por módulos -->
+    <script src="js/sesion.js"></script>
+    <script src="js/datos.js"></script>
+    <script src="js/ui-modales.js"></script>
+    <script src="js/mapa.js"></script>
+    <script src="js/transporte.js"></script>
+    <script src="js/servicios.js"></script>
+    <script src="js/comunidad.js"></script>
+    <script src="js/configuracion.js"></script>
+    <script src="js/navegacion.js"></script>
+    <script src="js/sistema-alertas.js"></script>
+    <script src="js/cargar-vistas.js"></script>
+</body>
+</html>
