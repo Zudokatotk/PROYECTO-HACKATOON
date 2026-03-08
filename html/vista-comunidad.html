@@ -1,0 +1,115 @@
+<div id="vista-comunidad" class="vista">
+    <h3 class="titulo-seccion">Red de Apoyo Local</h3>
+    
+    <div id="menu-comunidad">
+        <p style="color: #666; font-size: 0.85rem; margin-bottom: 15px;">Conecta con otras mujeres, infórmate y pide ayuda.</p>
+        
+        <div class="tarjeta-estilo-imagen" onclick="abrirSubvistaForo()" style="border-left-color: #9b59b6;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="background: #f4ecf7; width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #9b59b6;">
+                    <i class="fa-solid fa-comments"></i>
+                </div>
+                <div>
+                    <h4 style="margin: 0; color: #351a42; font-size: 1.1rem;">Foro de Mujeres</h4>
+                    <p style="color: #888; font-size: 0.85rem; margin-top: 5px;">Únete a la conversación y comparte experiencias.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tarjeta-acordeon">
+            <div class="acordeon-header" onclick="toggleAcordeon(this)">
+                <h4><i class="fa-solid fa-circle-info" style="color: #3498db;"></i> Información y Trámites</h4>
+                <i class="fa-solid fa-chevron-down icono-flecha"></i>
+            </div>
+            <div class="acordeon-contenido">
+                <div class="tarjeta-info">
+                    <div class="icono-info" style="color:#3498db; background:#ebf5fb;">
+                        <i class="fa-solid fa-file-contract"></i>
+                    </div>
+                    <div class="texto-info">
+                        <h5>¿Cómo realizar una denuncia?</h5>
+                        <p>Dirígete a la FELCV con tu carnet. Tienes derecho a un abogado de oficio gratuito.</p>
+                    </div>
+                </div>
+                <div class="tarjeta-info">
+                    <div class="icono-info" style="color:#3498db; background:#ebf5fb;">
+                        <i class="fa-solid fa-baby"></i>
+                    </div>
+                    <div class="texto-info">
+                        <h5>Bono Juana Azurduy</h5>
+                        <p>Inscríbete en tu centro de salud más cercano con tu prueba de embarazo y C.I.</p>
+                    </div>
+                </div>
+                <div class="tarjeta-info">
+                    <div class="icono-info" style="color:#3498db; background:#ebf5fb;">
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                    </div>
+                    <div class="texto-info">
+                        <h5>Créditos Banca Mujer</h5>
+                        <p>Microcréditos con tasas bajas para mujeres emprendedoras en el Banco Unión.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tarjeta-acordeon" style="border-left-color: #e74c3c;">
+            <div class="acordeon-header" onclick="toggleAcordeon(this)">
+                <h4 style="color: #c0392b;">
+                    <i class="fa-solid fa-phone-volume"></i> Números de Emergencia
+                </h4>
+                <i class="fa-solid fa-chevron-down icono-flecha" style="color: #e74c3c;"></i>
+            </div>
+            <div class="acordeon-contenido">
+                <a href="tel:110" class="btn-emergencia">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <i class="fa-solid fa-building-shield icono-izq"></i> Policía
+                    </div>
+                    <i class="fa-solid fa-phone icono-der"></i>
+                </a>
+                <a href="tel:119" class="btn-emergencia">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <i class="fa-solid fa-fire-extinguisher icono-izq"></i> Bomberos
+                    </div>
+                    <i class="fa-solid fa-phone icono-der"></i>
+                </a>
+                <a href="tel:160" class="btn-emergencia">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <i class="fa-solid fa-truck-medical icono-izq"></i> Ambulancias
+                    </div>
+                    <i class="fa-solid fa-phone icono-der"></i>
+                </a>
+                <a href="tel:120" class="btn-emergencia">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <i class="fa-solid fa-user-shield icono-izq"></i> P.A.C.
+                    </div>
+                    <i class="fa-solid fa-phone icono-der"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="subvista-foro" class="oculto">
+        <button class="btn-volver" onclick="cerrarSubvistaForo()">
+            <i class="fa-solid fa-arrow-left"></i> Volver al Menú
+        </button>
+        <h4 style="color: #351a42; margin-bottom: 10px; font-size: 1.1rem;">
+            <i class="fa-solid fa-comments" style="color: #9b59b6;"></i> Foro de Mujeres
+        </h4>
+        <p style="font-size: 0.85rem; color: #888; margin-bottom: 15px;">
+            <i class="fa-solid fa-shield-halved" style="color:#2ecc71;"></i> Protegido por IA contra lenguaje ofensivo.
+        </p>
+        
+        <div class="formulario-alerta">
+            <textarea id="texto-nuevo-chat" class="textarea-app" placeholder="¿Cómo te sientes hoy? ¿Necesitas un consejo?" rows="2"></textarea>
+            <div class="opciones-alerta">
+                <label class="checkbox-anonimo">
+                    <input type="checkbox" id="check-anonimo-chat"> Ocultar identidad
+                </label>
+                <button class="btn-accion btn-enviar-morado" onclick="publicarChat()">
+                    <i class="fa-solid fa-paper-plane"></i> Publicar
+                </button>
+            </div>
+        </div>
+        <div id="contenedor-chat"></div>
+    </div>
+</div>

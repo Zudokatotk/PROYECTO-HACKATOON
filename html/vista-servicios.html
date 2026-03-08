@@ -1,0 +1,72 @@
+<div id="vista-servicios" class="vista">
+    <h3 class="titulo-seccion" id="titulo-servicios">Empleo y Servicios</h3>
+    
+    <div id="menu-servicios">
+        <p style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">Apoya el trabajo de otras mujeres en tu ciudad.</p>
+        
+        <div class="tarjeta-estilo-imagen" onclick="abrirSubvistaServicio('empleo')">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="background: #f4ecf7; width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #9b59b6;">
+                    <i class="fa-solid fa-briefcase"></i>
+                </div>
+                <div>
+                    <h4 style="margin: 0;">Red de Empleo</h4>
+                    <p style="color: #888; font-size: 0.85rem; margin-top: 5px;">Solicita un servicio u ofrece tu trabajo.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tarjeta-estilo-imagen" style="border-left-color:#e74c3c;" onclick="abrirSubvistaServicio('directorio')">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="background: #fdedef; width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #e74c3c;">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+                <div>
+                    <h4 style="margin: 0;">Directorio de Negocios</h4>
+                    <p style="color: #888; font-size: 0.85rem; margin-top: 5px;">Salud, Belleza, Restaurantes, Hoteles.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="subvista-empleo" class="oculto">
+        <button class="btn-volver" onclick="cerrarSubvistaServicio()">
+            <i class="fa-solid fa-arrow-left"></i> Volver
+        </button>
+        <div class="pestañas-toggle">
+            <button class="tab-btn activo" id="btn-tab-pedir" onclick="cambiarTabEmpleo('pedir')">Solicitar</button>
+            <button class="tab-btn" id="btn-tab-ofrecer" onclick="cambiarTabEmpleo('ofrecer')">Ofrecer</button>
+        </div>
+
+        <div id="contenido-empleo-pedir">
+            <div class="input-viaje-container" style="border-color: #9b59b6; margin-bottom: 20px;">
+                <i class="fa-solid fa-magnifying-glass" style="color: #9b59b6;"></i>
+                <input type="text" id="buscador-empleo" class="input-viaje" placeholder="Ej: niñera, venta de ropa, plomería..." onkeyup="filtrarTrabajadoras()">
+            </div>
+            <div class="lista-perfiles" id="lista-trabajadoras"></div>
+        </div>
+
+        <div id="contenido-empleo-ofrecer" class="oculto">
+            <div class="formulario-alerta">
+                <label style="font-size: 0.85rem; font-weight: bold; color: #666;">¿Qué ofreces?</label>
+                <input type="text" id="input-ofrecer-titulo" class="input-form" placeholder="Ej: Venta de postres, Clases de matemáticas..." style="margin-top: 5px; margin-bottom: 10px;">
+                <label style="font-size: 0.85rem; font-weight: bold; color: #666;">Descripción corta</label>
+                <input type="text" id="input-ofrecer-desc" class="input-form" placeholder="Ej: Atiendo por las tardes..." style="margin-top: 5px; margin-bottom: 10px;">
+                <button class="btn-accion" onclick="publicarServicioPropio()">
+                    <i class="fa-solid fa-bullhorn"></i> Publicar mi servicio
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="subvista-directorio" class="oculto">
+        <button class="btn-volver" onclick="cerrarSubvistaServicio()">
+            <i class="fa-solid fa-arrow-left"></i> Volver
+        </button>
+        <div class="input-viaje-container" style="border-color: #e74c3c; margin-bottom: 20px;">
+            <i class="fa-solid fa-magnifying-glass" style="color: #e74c3c;"></i>
+            <input type="text" id="buscador-negocios" class="input-viaje" placeholder="Buscar salud, belleza, restaurante, hotel..." onkeyup="filtrarNegocios()">
+        </div>
+        <div class="lista-perfiles" id="lista-negocios"></div>
+    </div>
+</div>

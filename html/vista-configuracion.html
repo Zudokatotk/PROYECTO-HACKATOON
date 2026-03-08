@@ -1,0 +1,57 @@
+<div id="vista-configuracion" class="vista">
+    <h3 class="titulo-seccion"><i class="fa-solid fa-user-gear"></i> Ajustes de la App</h3>
+    
+    <div class="tarjeta-estilo-imagen">
+        <h4 style="color: #4a235a;"><i class="fa-solid fa-route"></i> Alarma Perimetral (Geocerca)</h4>
+        <p style="color: #666; font-size: 0.85rem; margin-bottom: 10px;">
+            Selecciona un lugar en el mapa. Si sales de un <strong>radio de 50 metros</strong> de ese punto, enviaremos tu ubicación en vivo a tu contacto.
+        </p>
+        
+        <div id="formulario-rutina" style="background:#f8f9fa; padding:12px; border-radius:10px; border:1px solid #eee;">
+            <p style="font-size: 0.8rem; color: #e74c3c; font-weight: bold; margin-bottom: 5px;">
+                1. Toca el mapa para establecer el perímetro
+            </p>
+            <div class="contenedor-mapa-estilo" style="height: 160px; margin-bottom: 10px;">
+                <div id="mapa-geocerca" style="height: 100%; width: 100%;"></div>
+            </div>
+
+            <input type="text" class="input-form" placeholder="Nombre del lugar (Ej. Casa)" id="rutina-lugar" style="margin-top:0;">
+            <input type="text" class="input-form" placeholder="Nombre de Contacto (Ej. Mamá)" id="rutina-contacto">
+            <input type="tel" class="input-form" placeholder="Número de celular" id="rutina-tel">
+            <button class="btn-accion" style="background: linear-gradient(135deg, #e74c3c, #c0392b);" onclick="guardarRutina()">
+                <i class="fa-solid fa-shield-halved"></i> Activar Geocerca
+            </button>
+        </div>
+        
+        <div id="lista-rutinas" style="margin-top: 15px;"></div>
+    </div>
+    
+    <hr class="separador-elegante">
+    
+    <div class="tarjeta-estilo-imagen">
+        <h4 style="color: #4a235a;"><i class="fa-solid fa-calendar-days"></i> Calendario Inteligente</h4>
+        <p style="color: #666; font-size: 0.85rem;">Toca el <strong>primer día de tu último periodo</strong>.</p>
+        
+        <div class="calendario-header">
+            <i class="fa-solid fa-chevron-left" style="color:#8e44ad; cursor:pointer;" onclick="cambiarMesCalendario(-1)"></i>
+            <span id="mes-anio-texto"></span>
+            <i class="fa-solid fa-chevron-right" style="color:#8e44ad; cursor:pointer;" onclick="cambiarMesCalendario(1)"></i>
+        </div>
+
+        <div class="dias-semana">
+            <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
+        </div>
+        <div class="dias-grid" id="cuadricula-dias"></div>
+        <div class="leyenda">
+            <span><span class="punto-color" style="background:#ff7675;"></span> Periodo</span>
+            <span><span class="punto-color" style="background:#74b9ff;"></span> Fértil</span>
+            <span><span class="punto-color" style="background:#e8daef;"></span> Infértil</span>
+        </div>
+        <div class="caja-ia" id="resultado-ia">
+            <p style="color: #8e44ad; font-size: 1.1rem; margin-bottom: 5px;">
+                <strong><i class="fa-solid fa-brain"></i> Asistente IA dice:</strong>
+            </p>
+            <p id="texto-consejo-ia" style="color: #333; font-size: 0.9rem; line-height: 1.4;"></p>
+        </div>
+    </div>
+</div>

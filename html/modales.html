@@ -1,0 +1,64 @@
+<!-- Modal de Perfil -->
+<div id="modal-perfil" class="modal-overlay">
+    <div class="modal-contenido">
+        <button class="btn-cerrar-modal" onclick="cerrarModalPerfil()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <img src="https://cdn-icons-png.flaticon.com/512/4140/4140047.png" class="foto-modal">
+        <h3 style="color: #4a235a; margin-bottom: 20px; font-size: 1.4rem;">Datos de Cuenta</h3>
+        <div class="dato-perfil">
+            <label>Nombre y Apellido</label>
+            <span>Valeria Gómez</span>
+        </div>
+        <div class="dato-perfil">
+            <label>Correo Electrónico</label>
+            <span>valeria.gomez@email.com</span>
+        </div>
+        <div class="dato-perfil">
+            <label>Edad</label>
+            <span>24 años</span>
+        </div>
+        <div class="dato-perfil" style="background: #fff8e1; border-left-color: #f39c12;">
+            <label>Estado de Seguridad</label>
+            <span style="color: #d35400; font-weight: bold;">
+                <i class="fa-solid fa-circle-check" style="color: #f39c12;"></i> Identidad Verificada
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Información Dinámica -->
+<div id="modal-info-dinamico" class="modal-overlay">
+    <div class="modal-contenido" style="text-align: left;">
+        <button class="btn-cerrar-modal" onclick="cerrarModalInfo()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+            <img id="mod-info-avatar" src="" class="foto-modal" style="margin-bottom:0; width: 70px; height: 70px;">
+            <div>
+                <h3 id="mod-info-nombre" style="color: #4a235a; margin-bottom: 5px; font-size: 1.2rem;"></h3>
+                <div style="color: #f39c12; font-size: 0.95rem; font-weight: bold;">
+                    <i class="fa-solid fa-star"></i> <span id="mod-info-estrellas"></span> 
+                    <span style="color:#888; font-size:0.8rem; font-weight:normal;" id="mod-info-trabajos"></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dato-perfil" style="background: #f4ecf7; border-left-color: #9b59b6; margin-bottom: 15px;">
+            <label id="mod-info-label-extra">Detalle</label>
+            <span id="mod-info-extra" style="font-size: 0.9rem;"></span>
+        </div>
+        
+        <div id="contenedor-mini-mapa" class="contenedor-mapa-estilo oculto" style="height: 150px;">
+            <div id="mapa-negocio" style="height: 150px; width:100%;"></div>
+        </div>
+
+        <h5 style="color: #351a42; margin: 0 0 10px 0; font-size: 1rem;">
+            <i class="fa-solid fa-comment-dots"></i> Reseñas de usuarias
+        </h5>
+        <div id="mod-info-resenas"></div>
+        
+        <a id="mod-info-btn" href="#" class="btn-accion" style="margin-top: 20px;"></a>
+    </div>
+</div>

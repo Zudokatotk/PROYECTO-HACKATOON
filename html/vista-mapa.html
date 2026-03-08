@@ -1,0 +1,31 @@
+<div id="vista-mapa" class="vista">
+    <h3 class="titulo-seccion">Mapa de Seguridad</h3>
+    <div class="contenedor-mapa-estilo"><div id="mapa-interactivo"></div></div>
+    <button class="btn-accion btn-secundario" style="margin-top: 0; margin-bottom: 20px;" onclick="simularAvance()">
+        <i class="fa-solid fa-person-walking"></i> Simular mi movimiento
+    </button>
+
+    <div class="tarjeta-estilo-imagen">
+        <h4><i class="fa-solid fa-shield-heart" style="color: #2ecc71;"></i> Puntos seguros</h4>
+        <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">Toca un punto para verlo en el mapa</p>
+        <ul class="lista-estilo-imagen" id="contenedor-puntos-seguros"></ul>
+    </div>
+
+    <div class="tarjeta-estilo-imagen" style="border-left-color: #e74c3c;">
+        <h4 style="display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-bullhorn" style="color: #e74c3c;"></i> Alertas en tu zona
+        </h4>
+        <div class="formulario-alerta" style="border-color: #fdedef;">
+            <textarea id="texto-nueva-alerta" class="textarea-app" placeholder="¿Viste algo sospechoso? Repórtalo..." rows="2"></textarea>
+            <div class="opciones-alerta">
+                <label class="checkbox-anonimo">
+                    <input type="checkbox" id="check-anonimo-alerta"> Ocultar identidad
+                </label>
+                <button class="btn-accion btn-alerta btn-alerta-rojo" onclick="publicarAlerta()">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Alertar
+                </button>
+            </div>
+        </div>
+        <div id="contenedor-alertas"></div>
+    </div>
+</div>

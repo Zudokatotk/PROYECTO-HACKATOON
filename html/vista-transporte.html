@@ -1,0 +1,29 @@
+<div id="vista-transporte" class="vista">
+    <h3 class="titulo-seccion">Transporte Seguro</h3>
+    
+    <div class="tarjeta-estilo-imagen" id="formulario-transporte">
+        <h4><i class="fa-solid fa-car-side"></i> ¿A dónde vas?</h4>
+        <p style="color: #666; font-size: 0.85rem; margin-bottom: 15px;">Solo te conectaremos con conductoras mujeres verificadas.</p>
+        <div class="input-viaje-container">
+            <i class="fa-solid fa-location-crosshairs" style="color: #9b59b6;"></i>
+            <input type="text" class="input-viaje" value="Mi ubicación actual (Sucre)" disabled>
+        </div>
+        <div class="input-viaje-container" style="border-color: #9b59b6;">
+            <i class="fa-solid fa-location-dot" style="color: #e74c3c;"></i>
+            <input type="text" class="input-viaje" placeholder="Ej: Mercado Central..." id="input-destino">
+        </div>
+        <button class="btn-accion" onclick="solicitarTransporte()">
+            <i class="fa-solid fa-magnifying-glass"></i> Buscar Conductoras
+        </button>
+    </div>
+
+    <div id="resultados-transporte" style="display: none;">
+        <div class="contenedor-mapa-estilo"><div id="mapa-transporte"></div></div>
+        <h4 style="color: #351a42; margin-bottom: 10px;">Conductoras disponibles</h4>
+        <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">Toca un perfil para ver reseñas y confirmar viaje.</p>
+        <div id="lista-conductoras"></div>
+        <button class="btn-accion btn-secundario" style="margin-top: 15px;" onclick="cancelarTransporte()">
+            <i class="fa-solid fa-arrow-left"></i> Cambiar destino
+        </button>
+    </div>
+</div>
