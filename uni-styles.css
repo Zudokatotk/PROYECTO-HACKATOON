@@ -138,7 +138,7 @@ input:checked + .slider { background-color: #e056fd; } input:checked + .slider:b
 
 /* --- BARRA INFERIOR --- */
 .barra-inferior { 
-    position: fixed !important; /* Cambio de absolute a fixed */
+    position: fixed !important;
     bottom: 0 !important; 
     left: 0;
     right: 0;
@@ -146,7 +146,10 @@ input:checked + .slider { background-color: #e056fd; } input:checked + .slider:b
     background-color: white; 
     display: flex; 
     justify-content: space-around; 
-    padding: 12px 0 20px 0 !important; /* Padding ajustado a 20px */
+    align-items: flex-start; /* Alinear íconos arriba */
+    padding: 12px 0 12px 0 !important; /* Padding normal arriba */
+    padding-bottom: max(12px, env(safe-area-inset-bottom)) !important; /* Extender hasta abajo */
+    min-height: 70px; /* Altura mínima */
     box-shadow: 0 -5px 15px rgba(0,0,0,0.05); 
     border-top-left-radius: 20px; 
     border-top-right-radius: 20px; 
@@ -155,40 +158,26 @@ input:checked + .slider { background-color: #e056fd; } input:checked + .slider:b
 
 /* Espaciador invisible para botones del sistema */
 .espaciador-sistema {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 0;
-    background: transparent;
-    pointer-events: none;
-    z-index: 9;
+    display: none; /* Ya no lo necesitamos */
 }
 
 /* Ajuste para celulares (pantallas angostas) */
 @media (max-width: 600px) {
     .barra-inferior {
-        padding: 15px 0 20px 0 !important; /* Ajustado a 20px */
-        bottom: 0 !important;
-    }
-    
-    .espaciador-sistema {
-        height: 20px; /* Ajustado también */
+        min-height: 90px !important; /* Más alto en celulares */
+        padding: 15px 0 0 0 !important; /* Sin padding abajo, se extiende solo */
     }
     
     .contenido-vistas {
-        padding-bottom: 155px !important; /* Espacio en celulares */
+        padding-bottom: 140px !important; /* Espacio en celulares */
     }
 }
 
 /* Ajuste para tablets y PC (pantallas anchas) */
 @media (min-width: 601px) {
     .barra-inferior {
+        min-height: 70px !important;
         padding: 12px 0 12px 0 !important;
-    }
-    
-    .espaciador-sistema {
-        height: 0; /* Sin espacio extra en PC */
     }
     
     .contenido-vistas {
@@ -196,7 +185,16 @@ input:checked + .slider { background-color: #e056fd; } input:checked + .slider:b
     }
 }
 
-.nav-item { display: flex; flex-direction: column; align-items: center; color: #aeb6bf; cursor: pointer; transition: color 0.3s; width: 25%; } 
+.nav-item { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    color: #aeb6bf; 
+    cursor: pointer; 
+    transition: color 0.3s; 
+    width: 25%;
+    padding-top: 5px; /* Pequeño padding arriba */
+} 
 .nav-item i { font-size: 1.4rem; margin-bottom: 5px; }
 .nav-item span { font-size: 0.7rem; font-weight: 600; }
 .nav-item.activo { color: #8e44ad; }
