@@ -82,6 +82,19 @@
 </div>
 
 <style>
+/* Ajustar posición del botón según el tamaño de pantalla */
+@media (max-width: 600px) {
+    #estado-alerta {
+        bottom: 130px !important; /* Más arriba en celulares */
+    }
+}
+
+@media (min-width: 601px) {
+    #estado-alerta {
+        bottom: 90px !important; /* Más abajo en PC */
+    }
+}
+
 @keyframes pulseAlert {
     0%, 100% {
         transform: scale(1);
