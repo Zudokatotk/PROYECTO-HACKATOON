@@ -28,7 +28,8 @@ function cambiarVista(nombreVista, elementoNav) {
     if (elementoNav) elementoNav.classList.add('activo');
     
     if(nombreVista === 'comunidad') { 
-        cerrarSubvistaForo(); 
+        cerrarSubvistaForo();
+        inicializarVistaComunidad();
     }
     if(nombreVista === 'servicios') { 
         cerrarSubvistaServicio(); 

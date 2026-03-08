@@ -22,32 +22,50 @@
                 <i class="fa-solid fa-chevron-down icono-flecha"></i>
             </div>
             <div class="acordeon-contenido">
-                <div class="tarjeta-info">
-                    <div class="icono-info" style="color:#3498db; background:#ebf5fb;">
-                        <i class="fa-solid fa-file-contract"></i>
+                <div class="tarjeta-info" style="border-left: 4px solid #e74c3c; padding-left: 15px;">
+                    <div class="icono-info" style="color:#e74c3c; background:#fdedef;">
+                        <i class="fa-solid fa-gavel"></i>
                     </div>
                     <div class="texto-info">
                         <h5>¿Cómo realizar una denuncia?</h5>
-                        <p>Dirígete a la FELCV con tu carnet. Tienes derecho a un abogado de oficio gratuito.</p>
+                        <p style="margin-bottom: 10px;">Dirígete a la FELCV con tu carnet de identidad. Tienes derecho a un abogado de oficio gratuito y atención inmediata las 24 horas.</p>
+                        <a href="https://comunidad.org.bo/assets/archivos/herramienta/6f84c319033904df0e4c5498ab22fc87.pdf#:~:text=Memoriza%20la%20l%C3%ADnea%20gratuita%20de%20la%20Fuerza,la%20que%20puedas%20acudir%20para%20pedir%20auxilio." target="_blank" class="btn-accion" style="font-size: 0.85rem; padding: 8px 12px; margin-top: 8px;">
+                            <i class="fa-solid fa-external-link-alt"></i> Ubicar FELCV más cercana
+                        </a>
                     </div>
                 </div>
-                <div class="tarjeta-info">
-                    <div class="icono-info" style="color:#3498db; background:#ebf5fb;">
+
+                <div class="tarjeta-info" style="border-left: 4px solid #2ecc71; padding-left: 15px;">
+                    <div class="icono-info" style="color:#2ecc71; background:#eafaf1;">
                         <i class="fa-solid fa-baby"></i>
                     </div>
                     <div class="texto-info">
                         <h5>Bono Juana Azurduy</h5>
-                        <p>Inscríbete en tu centro de salud más cercano con tu prueba de embarazo y C.I.</p>
+                        <p style="margin-bottom: 10px;">Bs. 1,820 para embarazadas y niños menores de 2 años. Inscríbete en tu centro de salud con prueba de embarazo y C.I.</p>
+                        <a href="https://consultomibono.bja.gob.bo" target="_blank" class="btn-accion" style="font-size: 0.85rem; padding: 8px 12px; margin-top: 8px; background: linear-gradient(135deg, #2ecc71, #27ae60);">
+                            <i class="fa-solid fa-clipboard-check"></i> Requisitos y registro
+                        </a>
                     </div>
                 </div>
-                <div class="tarjeta-info">
-                    <div class="icono-info" style="color:#3498db; background:#ebf5fb;">
+
+                <div class="tarjeta-info" style="border-left: 4px solid #f39c12; padding-left: 15px;">
+                    <div class="icono-info" style="color:#f39c12; background:#fef5e7;">
                         <i class="fa-solid fa-hand-holding-dollar"></i>
                     </div>
                     <div class="texto-info">
                         <h5>Créditos Banca Mujer</h5>
-                        <p>Microcréditos con tasas bajas para mujeres emprendedoras en el Banco Unión.</p>
+                        <p style="margin-bottom: 10px;">Microcréditos con tasas bajas para mujeres emprendedoras en el Banco Unión. Desde Bs. 1,000 hasta Bs. 50,000 sin garantía hipotecaria.</p>
+                        <a href="https://bancounion.com.bo/BancaMujer" target="_blank" class="btn-accion" style="font-size: 0.85rem; padding: 8px 12px; margin-top: 8px; background: linear-gradient(135deg, #f39c12, #e67e22);">
+                            <i class="fa-solid fa-money-bill-wave"></i> Solicitar crédito online
+                        </a>
                     </div>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 12px; border-radius: 10px; margin-top: 15px; border-left: 3px solid #95a5a6;">
+                    <p style="font-size: 0.8rem; color: #555; line-height: 1.5;">
+                        <i class="fa-solid fa-info-circle" style="color: #7f8c8d;"></i> 
+                        <strong>Importante:</strong> Todos los enlaces te dirigen a sitios oficiales. Ningún trámite requiere pago de intermediarios.
+                    </p>
                 </div>
             </div>
         </div>
@@ -84,6 +102,58 @@
                     </div>
                     <i class="fa-solid fa-phone icono-der"></i>
                 </a>
+            </div>
+        </div>
+
+        <div class="tarjeta-acordeon" style="border-left-color: #e056fd;">
+            <div class="acordeon-header" onclick="toggleAcordeon(this)">
+                <h4><i class="fa-solid fa-user-group" style="color: #e056fd;"></i> Mis Amigas de Confianza</h4>
+                <i class="fa-solid fa-chevron-down icono-flecha" style="color: #e056fd;"></i>
+            </div>
+            <div class="acordeon-contenido">
+                <p style="color: #666; font-size: 0.85rem; margin-bottom: 15px;">
+                    <i class="fa-solid fa-bell" style="color: #e056fd;"></i> Estas personas recibirán tus alertas de emergencia.
+                </p>
+
+                <div class="formulario-alerta" style="border-color: #f4ecf7;">
+                    <input type="tel" id="input-numero-amiga" class="input-form" placeholder="Número de teléfono (ej: 70123456)" style="margin-top: 0; margin-bottom: 10px;">
+                    <input type="text" id="input-nombre-amiga" class="input-form" placeholder="Nombre (opcional)" style="margin-top: 0;">
+                    <button class="btn-accion" onclick="agregarAmiga()" style="margin-top: 12px;">
+                        <i class="fa-solid fa-user-plus"></i> Agregar Amiga
+                    </button>
+                </div>
+
+                <div id="lista-amigas-confianza">
+                    <!-- Lista de amigas agregadas -->
+                </div>
+
+                <div style="background: #fef5e7; padding: 12px; border-radius: 10px; margin-top: 15px; border-left: 3px solid #f39c12;">
+                    <p style="font-size: 0.8rem; color: #555; line-height: 1.5;">
+                        <i class="fa-solid fa-lightbulb" style="color: #f39c12;"></i> 
+                        <strong>Consejo:</strong> Agrega al menos 3 contactos de confianza que puedan ayudarte en caso de emergencia.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tarjeta-acordeon" style="border-left-color: #ff6b6b;">
+            <div class="acordeon-header" onclick="toggleAcordeon(this)">
+                <h4><i class="fa-solid fa-bell-exclamation" style="color: #ff6b6b;"></i> Alertas Recibidas</h4>
+                <i class="fa-solid fa-chevron-down icono-flecha" style="color: #ff6b6b;"></i>
+            </div>
+            <div class="acordeon-contenido">
+                <p style="color: #666; font-size: 0.85rem; margin-bottom: 15px;">
+                    <i class="fa-solid fa-shield-heart" style="color: #ff6b6b;"></i> Alertas de emergencia de tus amigas.
+                </p>
+
+                <div id="lista-alertas-recibidas">
+                    <!-- Alertas de amigas aparecerán aquí -->
+                </div>
+
+                <div style="background: #fdedef; padding: 15px; border-radius: 10px; text-align: center; color: #999; font-size: 0.85rem;" id="sin-alertas-mensaje">
+                    <i class="fa-solid fa-inbox" style="font-size: 2rem; color: #ddd; display: block; margin-bottom: 8px;"></i>
+                    No tienes alertas pendientes
+                </div>
             </div>
         </div>
     </div>
